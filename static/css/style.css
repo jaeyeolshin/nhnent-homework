@@ -1,0 +1,249 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+html {
+	font-family: 'Source Sans Pro', 'Nanum Gothic', Helvetica, sans-serif;
+	font-size: 16px;
+}
+
+body {
+	margin: 0;
+	background-color: #F1F8E9;
+}
+
+.page-header {
+	width: 100%;
+	box-sizing: border-box;
+	position: fixed;
+	top: 0px;
+	background-color: white;
+	border-top: 2px solid #8BC34A;
+	border-bottom: 1px solid #E0E0E0;
+	z-index: 9;
+}
+
+.page-header-inner {
+	width: 600px;
+	text-align: center;
+	position: relative;
+	margin: 0 auto;
+}
+
+.logo {
+	display: inline-block;
+	padding: 8px 0;
+	box-sizing: border-box;
+	position: relative;
+	font-family: Arvo;
+	font-weight: 700;
+	font-size: 1.6rem;
+	color: #4CAF50;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+.page-main {
+	position: relative;
+	top: 55px;
+	width: 600px;
+	margin: 0 auto;
+}
+
+.box {
+    margin: 10px 0;
+    padding: 5px;
+    box-sizing: border-box;
+    box-shadow: 1px 1px #E6EE9C;
+    border-radius: 3px;
+    background-color: white;
+    box-shadow: 1px 1px #E6EE9C;
+}
+
+.new-comment {
+    min-height: 160px;
+	display: flex;
+	flex-direction: column;
+}
+
+.new-comment-top {
+	display: flex;
+	flex-direction: row;
+}
+
+input {
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	border-bottom: 1px solid #E6EE9C;
+	flex-grow: 1;
+	margin: 5px;
+	padding: 3px;
+	font-family: 'Source Sans Pro', 'Nanum Gothic', Helvetica, sans-serif;
+	font-size: 1rem;
+    outline: none;
+    transition: all 0.5s;
+}
+
+textarea {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid #E6EE9C;
+    flex-grow: 1;
+	margin: 5px;
+	padding: 3px;
+	font-family: 'Source Sans Pro', 'Nanum Gothic', Helvetica, sans-serif;
+	font-size: 1rem;
+	outline: none;
+	resize: none;
+	overflow: hidden;
+}
+
+.new-comment-btns {
+	text-align: right;
+}
+
+button.btn {
+    margin: 5px;
+    width: 80px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    color: white;
+    font-family: 'Source Sans Pro', 'Nanum Gothic', Helvetica, sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+	text-transform: uppercase;
+	cursor: pointer;
+	outline: none;
+}
+
+button#btn-save {
+    background-color: #8BC34A;
+}
+
+button#btn-save:HOVER {
+    background-color: #4CAF50;
+}
+
+button#btn-modify {
+    background-color: #FFC107;
+}
+
+button#btn-modify:HOVER {
+    background-color: #FF9800;
+}
+
+button#btn-edit-save {
+    background-color: #8BC34A;
+}
+
+button#btn-edit-save:HOVER {
+    background-color: #4CAF50;
+}
+
+button#btn-edit-cancel {
+    background-color: #FFC107;
+}
+
+button#btn-edit-cancel:HOVER {
+    background-color: #FF9800;
+}
+
+.comment {
+	position: relative;
+    box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	margin: 10px 0;
+	padding: 5px;
+}
+
+.comment-top {
+	margin: 5px;
+	display: flex;
+	flex-direction: row;
+}
+
+.circle {
+	width: 40px;
+	height: 40px;
+	border-radius: 3px;
+	background-color: #4CAF50;
+}
+
+.comment-info {
+	flex-grow: 1;
+	margin-left: 10px;
+}
+
+.comment-info strong, i {
+	display: block;
+}
+
+.email, .content {
+	color: #212121;
+}
+
+.datetime {
+	font-size: 0.8rem;
+	color: #757575;
+}
+
+.comment-bottom {
+	margin: 5px;
+}
+
+.comment-btns {
+	display: none;
+}
+
+.comment:HOVER .comment-btns {
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    border-radius: 3px;
+    /* background-color: rgba(33, 33, 33, 0.8); */
+}
+
+.comment-edit {
+	display: none;
+	box-sizing: border-box;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.7);
+	z-index: 99;
+}
+
+.edit {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	width: 600px;
+	min-height: 180px;
+	left: 50%;
+	top: 50%;
+	margin-left: -300px;
+	margin-top: -90px;
+}
+
+.edit input {
+	flex-grow: 0;
+}
+
+.edit input.error {
+	background-color: #ffcdd2;
+	border-bottom: 1px solid #f44336;
+	transition: all 0.5s;
+}
+
+.edit textarea {
+	flex-grow: 1;
+}
+
+.edit-btns {
+	text-align: right;
+}
