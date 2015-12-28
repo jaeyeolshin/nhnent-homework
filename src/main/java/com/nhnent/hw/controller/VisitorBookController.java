@@ -29,6 +29,9 @@ public class VisitorBookController {
     
     @RequestMapping(method=RequestMethod.POST)
     public VisitorBook saveVisitorBook(@RequestBody VisitorBook visitorBook) {
+        if (!visitorBook.hasValidEmail()) {
+            throw new BadRequestException("Not Valid Email.");
+        }
         Date now = new Date();
         visitorBook.setCreatedAt(now);
         visitorBook.setModifiedAt(now);
@@ -60,9 +63,6 @@ public class VisitorBookController {
     
     @ResponseStatus(value=HttpStatus.NOT_FOUND)
     private class VisitorBookNotFoundException extends RuntimeException {
-        /**
-         * 
-         */
         private static final long serialVersionUID = -7626322547638600089L;
 
         private VisitorBookNotFoundException(long id) {
@@ -70,4 +70,12 @@ public class VisitorBookController {
         }
     }
     
+    @ResponseStatus(value=HttpStatus.BAD_REQUEST)
+    private class BadRequestException extends RuntimeException {
+        private static final long serialVersionUID = -5032106088723522027L;
+
+        private BadRequestException(String msg) {
+            super(msg);
+        }
+    }
 }

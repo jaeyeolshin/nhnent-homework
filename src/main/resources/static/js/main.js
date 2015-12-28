@@ -8,6 +8,14 @@ app.Comment = Backbone.Model.extend({
     modifiedAt: "",
     content: ""
   },
+  validate: (function () {
+    var regexEmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    return function () {
+      if (!regexEmail.test(this.get("email"))) {
+        return "Invalid Email";
+      }
+    };
+  }()),
   parseOptions: {
     weekday: "long", year: "numeric", month: "short",
     day: "numeric", hour: "2-digit", minute: "2-digit"
@@ -84,15 +92,31 @@ app.VisitorBookView = Backbone.View.extend({
     this.comments.each(this.add, this);
   },
   save: function () {
-    this.comments.create({
+    var self = this;
+    var comment = new app.Comment({
       email: this.$email.val(),
       passwd: this.$passwd.val(),
       content: this.$content.val()
-    }, { wait: true });
+    });
     
-    this.$email.val("");
-    this.$passwd.val("");
-    this.$content.val("");
+    if (comment.isValid()) {
+      this.comments.create(comment, { 
+        wait: true,
+        error: function (model, response) {
+          if (response.status == 400) {
+            self.handleInputError(self.$email);
+          }
+        }
+      });
+      this.$email.val("");
+      this.$passwd.val("");
+      this.$content.val("");
+    } else {
+      this.$email.addClass("error");
+      setTimeout(function () {
+        self.$email.removeClass("error");
+      }, 2000);
+    }
   },
   modify: function () {
     var self = this;
@@ -105,7 +129,7 @@ app.VisitorBookView = Backbone.View.extend({
       },
       error: function (model, response) {
         if (response.status == 404) {
-          self.showPasswordError();
+          self.handleInputError(self.$editPasswd);
         } else {
           self.showUnknownError();
         }
@@ -123,11 +147,10 @@ app.VisitorBookView = Backbone.View.extend({
     this.$editPasswd.val("");
     this.$editContent.val("");
   },
-  showPasswordError: function () {
-    var self = this;
-    this.$editPasswd.addClass("error");
+  handleInputError(elem) {
+    elem.addClass("error");
     setTimeout(function () {
-      self.$editPasswd.removeClass("error");
+      elem.removeClass("error");
     }, 2000);
   },
   showUnknownError: function () {

@@ -13,10 +13,13 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 @Entity
 public class VisitorBook {
     
+    private static final String EMAIL_PATTERN = 
+            "^(([^<>()[\\]\\.,;:\\s@\"]+(\\.[^<>()[\\]\\.,;:\\s@\"]+)*)|(\".+\"))@(([^<>()[\\]\\.,;:\\s@\"]+\\.)+[^<>()[\\]\\.,;:\\s@\"]{2,})$";
+    
     @Id
     @GeneratedValue
     private long id;
-    
+
     @Column(nullable = false)
     private String email;
     
@@ -71,6 +74,10 @@ public class VisitorBook {
 
     public void setModifiedAt(Date modifiedAt) {
         this.modifiedAt = modifiedAt;
+    }
+    
+    public boolean hasValidEmail() {
+        return this.email.matches(EMAIL_PATTERN);
     }
     
 }

@@ -83,6 +83,12 @@ input {
     transition: all 0.5s;
 }
 
+input.error {
+    background-color: #ffcdd2;
+    border-bottom: 1px solid #f44336;
+    transition: all 0.5s;
+}
+
 textarea {
     border-top: none;
     border-left: none;
@@ -232,12 +238,6 @@ button#btn-edit-cancel:HOVER {
 
 .edit input {
 	flex-grow: 0;
-}
-
-.edit input.error {
-	background-color: #ffcdd2;
-	border-bottom: 1px solid #f44336;
-	transition: all 0.5s;
 }
 
 .edit textarea {
