@@ -16,6 +16,21 @@ app.Comment = Backbone.Model.extend({
       }
     };
   }()),
+  pickBgClass: (function () {
+    var colorClasses = [ "bg-green", "bg-blue", "bg-orange", "bg-red" ];
+    function hashSome (str) {
+      var s = str.trim();
+      var val = 0;
+      for (i = 0; i < 4; i++) {
+        val = val * 31 + s.charCodeAt(i);
+      }
+      return val;
+    }
+    return function () {
+      var hashed = hashSome(this.get("email"));
+      return colorClasses[hashed % 4];
+    }
+  }()),
   parseOptions: {
     weekday: "long", year: "numeric", month: "short",
     day: "numeric", hour: "2-digit", minute: "2-digit"
@@ -47,6 +62,8 @@ app.CommentView = Backbone.View.extend({
   template: _.template($("#comment-template").html()),
   render: function () {
     this.$el.html(this.template(this.model.attributes));
+    var picked = this.model.pickBgClass();
+    this.$(".circle").addClass(picked);
     return this;
   },
   modify: function () {
