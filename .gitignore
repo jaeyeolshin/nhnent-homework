@@ -2,4 +2,3 @@ bin/
 build/
 .settings/
 .gradle/
-application.properties
