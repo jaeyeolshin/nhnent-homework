@@ -1,4 +1,5 @@
 # nhnent-homework
+[![Build Status](https://travis-ci.org/jaeyeolshin/nhnent-homework.svg?branch=master)](https://travis-ci.org/jaeyeolshin/nhnent-homework)
 
 ## 구현
 #### 서버
