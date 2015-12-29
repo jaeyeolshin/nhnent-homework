@@ -92,7 +92,6 @@ app.VisitorBookView = Backbone.View.extend({
     this.comments.each(this.add, this);
   },
   save: function () {
-    var self = this;
     var comment = new app.Comment({
       email: this.$email.val(),
       passwd: this.$passwd.val(),
@@ -112,10 +111,7 @@ app.VisitorBookView = Backbone.View.extend({
       this.$passwd.val("");
       this.$content.val("");
     } else {
-      this.$email.addClass("error");
-      setTimeout(function () {
-        self.$email.removeClass("error");
-      }, 2000);
+      this.handleInputError(this.$email);
     }
   },
   modify: function () {
