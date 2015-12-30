@@ -54,7 +54,8 @@ app.CommentView = Backbone.View.extend({
   tagName: "article",
   className: "comment box",
   initialize: function () {
-    this.model.on("change", this.render, this);
+    this.listenTo(this.model, "change", this.render);
+    this.listenTo(this.model, "remove", this.remove);
   },
   events: {
     "click #btn-modify": "modify"
@@ -92,12 +93,6 @@ app.VisitorBookView = Backbone.View.extend({
     "click #btn-save": "save",
     "click #btn-edit-save": "modify",
     "click #btn-edit-cancel": "closeModifyForm"
-  },
-  render: function () {
-    this.comments.each(function (item) {
-      var itemView = new app.CommentView({ model: item });
-      this.$commentList.append(itemView.render().el);
-    }, this);
   },
   add: function (comment) {
     var view = new app.CommentView({ model: comment });
@@ -137,7 +132,9 @@ app.VisitorBookView = Backbone.View.extend({
     this.modelToEdit.set("content", this.$editContent.val());
     this.modelToEdit.save(this.modelToEdit.attributes, { 
       wait: true,
-      success: function () {
+      success: function (model) {
+        self.comments.remove(model)
+        self.comments.add(model);
         self.closeModifyForm();
       },
       error: function (model, response) {

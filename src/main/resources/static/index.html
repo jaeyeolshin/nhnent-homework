@@ -13,7 +13,7 @@
                 <a class="logo" href="/">Visitor Book</a>
             </div>
         </header>
-        <main class="page-main">
+        <section class="page-main">
             <section class="new-comment box">
                 <div class="new-comment-top">
 	                <input id="email" type="email" placeholder="email" tabindex="1" spellcheck="false">
@@ -36,13 +36,19 @@
 	                </div>
 	            </div>
             </section>
-        </main>
+        </section>
         <script type="text/template" id="comment-template">
             <div class="comment-top">
                 <div class="circle"></div>
                 <div class="comment-info">
                     <strong class="email"><%= email %></strong>
-                    <i class="datetime"><%= createdAtDisplay %></i>
+                    <i class="datetime">
+                        <% if (createdAt != modifiedAt) { %>
+                            <%= modifiedAtDisplay %> (수정됨)
+                        <% } else { %>
+                            <%= createdAtDisplay %>
+                        <% } %>
+                    </i>
                 </div>
             </div>
             <div class="comment-bottom">

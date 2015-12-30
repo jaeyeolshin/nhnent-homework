@@ -24,7 +24,7 @@ public class VisitorBookController {
 
     @RequestMapping(method=RequestMethod.GET)
     public Iterable<VisitorBook> getAllVisitorBooks() {
-        return repository.findAll();
+        return repository.findAllByOrderByModifiedAtAsc();
     }
     
     @RequestMapping(method=RequestMethod.POST)
