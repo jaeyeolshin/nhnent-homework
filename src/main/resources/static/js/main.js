@@ -157,7 +157,7 @@ app.VisitorBookView = Backbone.View.extend({
     this.$editPasswd.val("");
     this.$editContent.val("");
   },
-  handleInputError(elem) {
+  handleInputError: function(elem) {
     elem.addClass("error");
     setTimeout(function () {
       elem.removeClass("error");
